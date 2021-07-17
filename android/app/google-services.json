@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "480253659542",
+    "project_id": "mozao-zap",
+    "storage_bucket": "mozao-zap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480253659542:android:31bc94e65c985a4ef6f5b7",
+        "android_client_info": {
+          "package_name": "souza.rocha.com.mozao_zap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480253659542-9e1ie7igadtl39p26avpqrbt6npf3g3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiXuxbda8PIIshfpsIH1JTbFluxejalY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480253659542-9e1ie7igadtl39p26avpqrbt6npf3g3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
