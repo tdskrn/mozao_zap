@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:mozao_zap/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mozao_zap/login.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FirebaseFirestore db = FirebaseFirestore.instance;
-
-  db.collection("usuarios").doc().set({"nome": "Vinicius", "idade": 35});
+void main() {
   runApp(
     MaterialApp(
-      home: Home(),
+      theme: ThemeData(
+          accentColor: Colors.greenAccent, primaryColor: Colors.green[900]),
+      home: Login(),
       debugShowCheckedModeBanner: false,
     ),
   );
