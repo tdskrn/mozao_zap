@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mozao_zap/models/usuario.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -110,8 +113,17 @@ class _CadastroState extends State<Cadastro> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Center(
-                  child: Text(_statusCadastro),
+                  child: Text(
+                    _statusCadastro,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
                 )
               ],
             ),
@@ -121,17 +133,36 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 
+  _cadastrarUsuario(Usuario usuario) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth
+        .createUserWithEmailAndPassword(
+            email: usuario.email, password: usuario.senha)
+        .then((usuarioCredenciado) {
+      setState(() {
+        _statusCadastro = "Usuario cadastrado no Firebase com Sucesso";
+      });
+    }).catchError((onError) {
+      _statusCadastro = "Erro ao cadastrar no Firebase";
+    });
+  }
+
   _validarCampos() {
     String nome = _controllerNome.text;
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
 
     if (nome.isNotEmpty && nome.length >= 6) {
-      if (email.contains("@")) {
+      if (email.contains("@") && email.length >= 8) {
         if (senha.length > 6) {
           setState(() {
             _statusCadastro = "Cadastro Realizado com sucesso";
           });
+          Usuario usuario = new Usuario();
+          usuario.nome = nome;
+          usuario.email = email;
+          usuario.senha = senha;
+          _cadastrarUsuario(usuario);
         } else {
           setState(() {
             _statusCadastro = "Senha invalida. Tente outra";
@@ -144,7 +175,7 @@ class _CadastroState extends State<Cadastro> {
       }
     } else {
       setState(() {
-        _statusCadastro = "nome de usuario invalido";
+        _statusCadastro = "Nome de usuario invalido";
       });
     }
   }
