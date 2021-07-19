@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mozao_zap/home.dart';
 import 'package:mozao_zap/models/usuario.dart';
 
 class Cadastro extends StatefulWidget {
@@ -16,6 +16,7 @@ class _CadastroState extends State<Cadastro> {
   TextEditingController _controllerSenha = new TextEditingController();
 
   String _statusCadastro = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,9 +140,12 @@ class _CadastroState extends State<Cadastro> {
         .createUserWithEmailAndPassword(
             email: usuario.email, password: usuario.senha)
         .then((usuarioCredenciado) {
-      setState(() {
-        _statusCadastro = "Usuario cadastrado no Firebase com Sucesso";
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
     }).catchError((onError) {
       _statusCadastro = "Erro ao cadastrar no Firebase";
     });
@@ -156,7 +160,7 @@ class _CadastroState extends State<Cadastro> {
       if (email.contains("@") && email.length >= 8) {
         if (senha.length > 6) {
           setState(() {
-            _statusCadastro = "Cadastro Realizado com sucesso";
+            _statusCadastro = "Login Realizado com sucesso";
           });
           Usuario usuario = new Usuario();
           usuario.nome = nome;
